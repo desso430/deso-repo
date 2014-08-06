@@ -1,0 +1,200 @@
+Task 1
+
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);	
+
+		System.out.println("Enter N: ");
+		int N = input.nextInt();
+		System.out.println("Enter M: ");
+		int M = input.nextInt();
+		
+		int[][] array = new int[N][M];
+		int number = 1;
+		
+		for(int i = 0; i<array.length;i++)
+		{
+			for(int j = 0;j<array.length;j++)
+			{
+				
+				array[i][j] = i + number;
+				number += 4;
+			}
+			number = 1;
+		}	
+		for(int i = 0; i<array.length;i++)
+		{
+			for(int j = 0;j<array.length;j++)
+			{
+				System.out.print(" "+array[i][j]);
+			}
+			System.out.printf("\n");
+		}
+	}
+}
+
+Task 2
+
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Enter N: ");
+		int N = input.nextInt();
+		System.out.println("Enter M: ");
+		int M = input.nextInt();
+		
+		int[][] array = new int[N][M];
+		int number = 1;
+		
+		for(int j = 0; j<M;j++)
+		{
+			    if(j%2 == 0)
+			    {
+			      for(int i = 0;i< N;i++)
+		            array[i][j] =  number++;
+			    }
+			    else
+			    {
+			      for(int i = N-1;i>=0;i--)
+			        array[i][j] =  number++;
+			    }
+		}	
+		for(int i = 0; i<N;i++)
+		{
+			for(int j = 0;j<M;j++)
+			{
+				System.out.print(" "+array[i][j]);
+			}
+			System.out.printf("\n");
+		}
+	}
+}
+
+Task 3
+
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);	
+
+		System.out.println("Enter N: ");
+		int N = input.nextInt();
+		System.out.println("Enter M: ");
+		int M = input.nextInt();
+		
+		int[][] array = new int[N][M];
+		int number = 0,temp = 0, a = 1;
+
+			for(int i = N-1; i>=0;i--)
+		     {
+			   for(int j = 0;j<=temp;j++)
+			    {  
+				   if(i == N)
+					 continue; 
+				   else
+				   {
+					  array[i][j] = number++;
+					  i++;
+				   }
+			    }
+			   i -= temp;
+      	      temp++;
+		     }	
+			temp = N-1; int i = 0,j=0;
+			for(int k =0;k<N-1;k++)
+			{
+				for(j = 0;j<temp;j++)
+				{
+				   if((i == N)&&(a == N))
+				     continue; 
+				   else
+					{
+					  array[i][a] = number++;
+					  i++; a++;
+					 }
+				}
+				i = 0;
+				temp--;
+				a -= temp;
+			}
+		for(i = 0; i<array.length;i++)
+		{
+			for(j = 0;j<array.length;j++)
+			{
+				System.out.print(" "+array[i][j]);
+			}
+			System.out.printf("\n");
+		}
+	}
+}
+
+Task 4
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);	
+
+		System.out.println("Enter N: ");
+		int N = input.nextInt();
+		System.out.println("Enter M: ");
+		int M = input.nextInt();
+		int depthRow1 = 0, depthRow2 = N-1, depthColumn1 = M-1, depthColumn2 = 0;
+		int row1 = 1, row2 = N-2, column1 = 0, column2 = M-2;
+		int limit1=M-1,limit2 = N-1, limit3 = 0,limit4 = 1;
+			
+		int[][] array = new int[N][M];
+		int number = 1, i = 0, j = 0;
+		int border = (N*M);
+		
+	do {
+			i = depthRow1++;
+			for(j = column1++;j<= limit1;j++)
+			{
+				array[i][j] = number++;
+			}			
+			j = depthColumn1--;
+			for(i = row1++ ;i<=limit2;i++)
+			{
+				array[i][j] = number++;
+			}		
+			i = depthRow2--;
+			for(j = column2--;j>=limit3;j--)
+			{
+				array[i][j] = number++;
+			}			
+			j = depthColumn2++;
+			for(i = row2-- ;i>=limit4;i--)
+			{
+				array[i][j] = number++;
+			}
+			limit1--;
+			limit2--;
+			limit3++;
+			limit4++;
+	} while (number <= border);
+	
+		for(i = 0; i<N;i++)
+		{
+			for(j = 0;j<M;j++)
+			{
+				System.out.print(" "+array[i][j]);
+			}
+			System.out.printf("\n");
+		}
+	}
+}
