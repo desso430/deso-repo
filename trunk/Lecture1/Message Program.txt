@@ -1,0 +1,66 @@
+import java.util.*;
+import java.util.Scanner;
+
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+
+public class Test {
+
+	public static void main(String[] args)
+	{
+		Scanner input = new Scanner(System.in);
+		
+		// Recipient's email ID needs to be mentioned.
+		System.out.print(" Message To (e-mail): ");
+		String to = input.nextLine();
+
+		// Sender's email ID needs to be mentioned
+		System.out.print(" Message From (e-mail): ");
+		String from = input.nextLine();
+		System.out.print("Please enter you're password: ");
+		String password = input.nextLine();
+
+		String host = "smtp.gmail.com";
+
+		// Get system properties
+		Properties properties = System.getProperties();
+
+		// Setup mail server
+		properties.setProperty("mail.smtp.host", host);
+
+		// Get the default Session object.
+		Session session = Session.getDefaultInstance(properties);
+
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(from));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
+					to));
+
+			// Set Subject: header field
+			System.out.println("Please enter title of message: ");
+			String title = input.next();
+			message.setSubject(title);
+
+			// Now set the actual message
+			System.out.println("Please enter actual message:");
+			String Text = input.next();
+			message.setText(Text);
+
+			// Send message
+			final Transport transport = session.getTransport("smtp");
+			transport.connect(host, 25, from, password);
+			transport.sendMessage(message, InternetAddress.parse(to));
+			transport.close();
+			System.out.println("Sent message successfully....");
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+		}
+	}
+}
