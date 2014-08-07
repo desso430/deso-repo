@@ -1,0 +1,459 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DessoCsharp;
+using System.Media;
+using System.IO;
+using WMPLib;
+
+namespace DesoCsharp
+{
+
+    class Program
+    {
+        static char Movement(int[,] array, int score, int CurrentBestScore,string Name, int NowPlaying)
+        {
+            int N = 4, i, j;
+            char move;
+
+            string[] MusicSongs = new string[] {"","One Republic - Counting Stars","Imagine Dragons - Demons","Nickelback - How You Remind Me",
+                                                   "One Republic - I Lived","Imagine Dragons - Radioactive","One Republic - Something I Need"};
+
+            Console.WriteLine("  You can call music player anytime by pressing 'm' to choose another song!!!");
+            Console.WriteLine("   Now Playing: {0}  .:.:.::\n\n", MusicSongs[NowPlaying]);
+            Console.WriteLine("  {0} please choose a move!\n", Name);
+            Console.WriteLine("\t\t w - UP");
+            Console.WriteLine("a - LEFT  \t s - DOWN  \t d - RIGHT\n\n");
+            Console.WriteLine(" {0} score:{1}  \t\t  Best Score:{2}\n\n", Name, score, CurrentBestScore);
+            for (i = 0; i < N; i++)
+            {
+                for (j = 0; j < N; j++)
+                    Console.Write("   " + array[i, j] + "   ");
+                Console.WriteLine("\n");
+            }
+            Console.Write("\n Move:");
+            move = char.Parse(Console.ReadLine());
+            return move;
+        }
+
+        static void RandomNumber(int[,] array, Random rand)
+        {
+            int i, j, M = 4;
+            bool check = false;
+            do
+            {
+                i = rand.Next(M);
+                j = rand.Next(M);
+                if (array[i, j] == 0)
+                {
+                    array[i, j] = 2;
+                    check = true;
+                }
+            } while (check != true);
+        }
+        
+        static int MoveUP(int[,] array, Random rand, int score)
+        {
+            try
+            {
+                int row, column, temp = 0, N = 4, M = 3;
+                for (row = M; row > 0; row--)
+                {
+                    for (column = 0; column < N; column++)
+                    {
+                        if (array[row, column] != 0)
+                        {
+                            if (array[row - 1, column] == 0)
+                            {
+                                array[row - 1, column] = array[row, column];
+                                array[row, column] = 0;
+                            }
+                            if (array[row - 1, column] == array[row, column])
+                            {
+                                array[row - 1, column] = (array[row, column] * 2);
+                                array[row, column] = 0;
+                                score += 12;
+                            }
+                        }
+                    }
+                }
+                while (temp < 4)
+                {
+                    for (row = M; row > 0; row--)
+                    {
+                        for (column = 0; column < N; column++)
+                        {
+                            if (array[row, column] != 0)
+                            {
+                                if (array[row - 1, column] == 0)
+                                {
+                                    array[row - 1, column] = array[row, column];
+                                    array[row, column] = 0;
+                                }
+                            }
+                        }
+                    }
+                    temp++;
+                }
+                RandomNumber(array, rand);
+                return score;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Index is out of range");
+            }
+            return score;
+        }
+        static int MoveDOWN(int[,] array, Random rand, int score)
+        {
+            try
+            {
+                int row, column, temp = 0, N = 4, M = 3;
+                for (row = 0; row < M; row++)
+                {
+                    for (column = 0; column < N; column++)
+                    {
+                        if (array[row, column] != 0)
+                        {
+                            if (array[row + 1, column] == 0)
+                            {
+                                array[row + 1, column] = array[row, column];
+                                array[row, column] = 0;
+                            }
+                            if (array[row + 1, column] == array[row, column])
+                            {
+                                array[row + 1, column] = (array[row, column] * 2);
+                                array[row, column] = 0;
+                                score += 12;
+                            }
+                        }
+                    }
+                }
+                while (temp < 4)
+                {
+                    for (row = 0; row < M; row++)
+                    {
+                        for (column = 0; column < N; column++)
+                        {
+                            if (array[row, column] != 0)
+                            {
+                                if (array[row + 1, column] == 0)
+                                {
+                                    array[row + 1, column] = array[row, column];
+                                    array[row, column] = 0;
+                                }
+                            }
+                        }
+                    }
+                    temp++;
+                }
+                RandomNumber(array, rand);
+                return score;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Index is out of range");
+            }
+            return score;
+        }
+
+        static int MoveLEFT(int[,] array, Random rand, int score)
+        {
+            try
+            {
+                int row, column, temp = 3, N = 4, M = 3;
+                for (row = 0; row < N; row++)
+                {
+                    for (column = M; column > 0; column--)
+                    {
+                        if (array[row, column] != 0)
+                        {
+                            if (array[row, column - 1] == 0)
+                            {
+                                array[row, column - 1] = array[row, column];
+                                array[row, column] = 0;
+                            }
+                            if (array[row, column - 1] == array[row, column])
+                            {
+                                array[row, column - 1] = (array[row, column] * 2);
+                                array[row, column] = 0;
+                                score += 12;
+                            }
+                        }
+                    }
+                }
+                while (temp < 4)
+                {
+                    for (row = 0; row < N; row++)
+                    {
+                        for (column = M; column > 0; column--)
+                        {
+                            if (array[row, column] != 0)
+                            {
+                                if (array[row, column - 1] == 0)
+                                {
+                                    array[row, column - 1] = array[row, column];
+                                    array[row, column] = 0;
+                                }
+                            }
+                        }
+                    }
+                    temp++;
+                }
+                RandomNumber(array, rand);
+                return score;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Index is out of range");
+            }
+            return score;
+        }
+
+        static int MoveRIGHT(int[,] array, Random rand, int score)
+        {
+            try
+            {
+                int row, column, temp = 0, N = 4, M = 3;
+                for (row = 0; row < N; row++)
+                {
+                    for (column = 0; column < M; column++)
+                    {
+                        if (array[row, column] != 0)
+                        {
+                            if (array[row, column + 1] == 0)
+                            {
+                                array[row, column + 1] = array[row, column];
+                                array[row, column] = 0;
+                            }
+                            if (array[row, column + 1] == array[row, column])
+                            {
+                                array[row, column + 1] = (array[row, column] * 2);
+                                array[row, column] = 0;
+                                score += 12;
+                            }
+                        }
+                    }
+                }
+                while (temp < 4)
+                {
+                    for (row = 0; row < N; row++)
+                    {
+                        for (column = 0; column < M; column++)
+                        {
+                            if (array[row, column] != 0)
+                            {
+                                if (array[row, column + 1] == 0)
+                                {
+                                    array[row, column + 1] = array[row, column];
+                                    array[row, column] = 0;
+                                }
+                            }
+                        }
+                    }
+                    temp++;
+                }
+                RandomNumber(array, rand);
+                return score;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Index is out of range");
+            }
+            return score;
+        }
+        static bool END(int[,] array)
+        {
+            int i, j, N = 4, count = 0;
+            bool flag = false;
+            for (i = 0; i < N; i++)
+            {
+                for (j = 0; j < N; j++)
+                {
+                    if (array[i, j] != 0)
+                        count++;
+                }
+            }
+            if (count == 16)
+                flag = true;
+            else
+                flag = false;
+            return flag;
+        }
+
+        static bool WIN(int[,] array)
+        {
+            int i, j, N = 4;
+            bool win = false;
+            for (i = 0; i < N; i++)
+            {
+                for (j = 0; j < N; j++)
+                    if (array[i, j] == 2048)
+                        win = true;
+                    else
+                        win = false;
+            }
+            return win;
+        }
+
+        static int MainFunction(int[,] array, char choice, int score, Random rand, int CurrentBestScore, string Name, int NowPlaying)
+        {
+            char UP = 'w', DOWN = 's', LEFT = 'a', RIGHT = 'd', MUSIC = 'm';
+
+            if ((choice != UP) && (choice != DOWN) && (choice != LEFT) && (choice != RIGHT) && (choice != MUSIC))
+            {
+                Console.Clear();
+               choice = Movement(array, score, CurrentBestScore, Name, NowPlaying);
+                Console.Clear();
+
+            }
+            if (choice == MUSIC)
+            {
+                Console.Clear();
+                Music(Name);
+                choice = Movement(array, score, CurrentBestScore, Name, NowPlaying);
+            }
+            if (choice == UP)
+            {
+                Console.Clear();
+                score = MoveUP(array, rand, score);
+            }
+
+            if (choice == DOWN)
+            {
+                Console.Clear();
+                score = MoveDOWN(array, rand, score);
+            }
+
+            if (choice == LEFT)
+            {
+                Console.Clear();
+                score = MoveLEFT(array, rand, score);
+            }
+            if (choice == RIGHT)
+            {
+                Console.Clear();
+                score = MoveRIGHT(array, rand, score);
+            }
+            return score;
+        }
+
+        static void Main()
+        {
+            Random rand = new Random();
+            int row, column, NowPlaying = 1 , score = 0, i = 0, N = 4, M = 3;
+            char choice;
+            string Name;
+            int CurrentBestScore = ReadBestScore();
+
+            int[,] array = new int[N, N];
+            do
+            {
+                row = rand.Next(M);
+                column = rand.Next(M);
+                if (array[row, column] == 0)
+                {
+                    array[row, column] = 2;
+                    i++;
+                }
+            } while (i < M);
+            Console.WriteLine("                     Welcome to my game 2048\n");
+            Console.WriteLine("                          Made by Deso!\n");
+            Console.WriteLine("                           Have Fun!!!\n\n");
+            Console.WriteLine("   Please enter your name! \n\n");
+            Console.Write("   Your Name:");
+            Name = Console.ReadLine();
+            NowPlaying = Music(Name);
+            do
+            {
+                if (END(array) == true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\n\n \t\t GAME OVER...!!!");
+                    break;
+                }
+                if (WIN(array) == true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\n\n \t\t YOU WIN...!!!");
+                    break;
+                }
+                if ((WIN(array) != true) || (END(array) != true))
+                {
+                    choice = Movement(array, score, CurrentBestScore, Name, NowPlaying);
+                    score = MainFunction(array, choice, score, rand, CurrentBestScore, Name, NowPlaying);
+                    if (score > CurrentBestScore)
+                        WriteBestScore(score);
+                }
+
+            } while (true);
+        }
+
+        static int Music(string Name)
+        {
+            int choice = 1;
+            string addres;
+            Console.WriteLine(" \n\n {0} for more fun , while you playing you can listen this songs...!!!\n", Name);
+            string[] MusicAddres = new string[] {"","C:\\Music\\Counting Stars.mp3","C:\\Music\\Demons.mp3","C:\\Music\\How You Remind Me.mp3",
+                                                    "C:\\Music\\I Lived.mp3","C:\\Music\\Radioactive.mp3","C:\\Music\\Something I Need.mp3"};
+            do
+            {
+                Console.WriteLine("  1.One Republic - Counting Stars");
+                Console.WriteLine("  2.Imagine Dragons - Demons");
+                Console.WriteLine("  3.Nickelback - How You Remind Me");
+                Console.WriteLine("  4.One Republic - I Lived");
+                Console.WriteLine("  5.Imagine Dragons - Radioactive");
+                Console.WriteLine("  6.One Republic - Something I Need\n\n");
+
+                Console.Write("  Song number:");
+                choice = int.Parse(Console.ReadLine());
+
+            } while ((choice <= 0) || (choice >= 7));
+            addres = MusicAddres[choice];
+
+            WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+            player.URL = addres;
+            player.controls.play();
+            return choice;
+        }
+
+        static void WriteBestScore(int score)
+        {
+            try
+            {
+                StreamWriter file = new StreamWriter("file.txt");
+                using (file)
+                {
+                    file.WriteLine(score);
+                }
+            }
+            catch (FileLoadException)
+            {
+                Console.WriteLine("Error opening file!");
+            }
+        }
+
+        static int ReadBestScore()
+        {
+            int BestScore = 0;
+            try
+            {
+                StreamReader file = new StreamReader("file.txt");
+                using (file)
+                {
+                    BestScore = int.Parse(file.ReadLine());
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Error opening file!");
+            }
+            return BestScore;
+        }
+    }
+}
+
+
+
