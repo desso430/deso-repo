@@ -1,0 +1,666 @@
+Task 1
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter first number: ");
+		float firstNumber = input.nextFloat();	// 1 number
+		System.out.print("Enter second number: ");
+		float secondNumber = input.nextFloat();	 // 2 number
+		System.out.print("Enter third number: ");
+		float thirdNumber = input.nextFloat();	  // 3 number
+		System.out.printf("Sum is: %.2f",(firstNumber+secondNumber+thirdNumber)); // Sum
+	}
+}
+Task 2
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float sum = 0;
+		float inputnumber = 0;
+		
+		do {
+		System.out.print("Enter number: ");
+		inputnumber = input.nextFloat();
+		sum += inputnumber;    // sum of all numbers
+		} while (inputnumber != 0);  // while entered  0
+		
+		System.out.printf("Sum is: %.2f", sum); // print sum
+	}
+}
+Task 3
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float mult = 1f;
+		float inputNumber = 0;
+		
+		do {
+		System.out.print("Enter number: ");
+		inputNumber = input.nextFloat();
+		if(inputNumber == 0) //in case user enters 0 , it doesn't multiplied
+		   continue;
+		else
+		 mult *= inputNumber;		
+		} while (inputNumber != 1);  // while entered  1
+		
+		System.out.printf(" Multiplication of the numbers is: %.3f", mult);
+	}
+}
+Task 4
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float inputNumber = 0;
+		int count = 0;		
+		
+		do {
+		    System.out.print("Enter number: ");
+		    inputNumber = input.nextFloat();
+		    if(inputNumber < 0)  // if entered negative number, it breaks
+			   break;
+		     else
+		    {
+		       if(inputNumber%2 == 0) // checks if number is even
+		        count++;   // count it
+		    }
+	    } while (true);
+		
+		System.out.print(" The number of even numbers is: " + count);
+	}
+}
+Task 5
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Enter \"0\" for exit! ");
+		System.out.print("Enter number: ");
+	    int  inputNumber = input.nextInt();
+	    if(inputNumber == 0)   // in case first number is 0
+	    	 System.out.println("You exit from program!");
+	    else
+	    {
+	    	int min = inputNumber, max = inputNumber, maxEven = 0;
+	    	do {
+		    System.out.print("Enter number: ");
+		    inputNumber = input.nextInt();
+		    if(inputNumber == 0)  // exit		 
+		    	 break;
+		    else
+		    {
+		      if(inputNumber < min) // find smallest number
+		          min = inputNumber;
+		      if(inputNumber > max)  // find biggest number
+		          max = inputNumber;
+		      if((inputNumber > maxEven)&&(inputNumber%2 != 0))  // find biggest odd number
+		    	  maxEven = inputNumber;
+		    }	   
+	      } while (true);  // infinity loop
+	    	
+	      System.out.println(" The smallest number is: " + min);
+		  System.out.println(" The biggest number is: " + max);
+		  System.out.println(" The biggest odd number is: " + maxEven);
+	    }
+	}
+}
+Task 6
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println(" Enter first number (N): ");
+		int N = input.nextInt();
+		
+		System.out.println(" Enter second number (M): ");
+		int M = input.nextInt();
+		
+		if(N == M) // if numbers are equal
+		System.out.println(" The numbers are equal!");
+		else
+		{	
+		  if(N < M) // if first is smallest
+		  {
+		    System.out.printf("All numbers between [(%d) - (%d)]\n",N ,M);
+			 for(int i = N+1; i < M; i++)	
+		      System.out.print(" " + i);
+		  }
+		  else     // if second is smallest
+		  {
+			 System.out.printf("All numbers between [(%d) - (%d)]\n",M ,N);
+			   for(int i = M+1; i < N; i++)	
+				 System.out.print(" " + i);
+		  }
+		}
+	}
+}
+Task 7
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		long sum = 0, mult = 1;
+		
+		System.out.println(" Enter first number (N): ");
+		int N = input.nextInt(); // first number (N)
+		
+		System.out.println(" Enter second number (M): ");
+		int M = input.nextInt();  // second number (M)
+		
+		if(N == M)   // if numbers are equal
+		  System.out.println(" The numbers are equal!");
+		else
+		{
+		  if(N < M)  // if first number is smaller than second
+		  {
+			 for(int i = N+1; i < M; i++)
+			 {
+		      sum += i; // sum of all numbers
+		      mult *= i;  // multiplication of all numbers
+			 }
+			 System.out.printf(" The sum of all numbers between [(%d) - (%d)] is: %d\n", N, M, sum);
+			 System.out.printf(" Multiplication of all numbers between [(%d) - (%d)] is: %d\n", N, M, mult);
+		  }
+		  else  // if second number is smaller than first
+		  {
+			   for(int i = M+1; i < N; i++)	
+			   {
+				 sum += i; // sum of all numbers
+			     mult *= i; // multiplication of all numbers
+			   }
+			   System.out.printf(" The sum of all numbers between [(%d) - (%d)] is: %d\n", M, N, sum);
+			   System.out.printf(" Multiplication of all numbers between [(%d) - (%d)] is: %d\n", M, N, mult);
+		  }
+		}
+	}
+}
+
+Task 8
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		float[] holesM = new float[100]; // array for holes in (M) ruler
+		float[] holesN = new float[100]; // array for holes in (N) ruler
+		int count = 0;
+		float temp = 0;
+		
+		System.out.print("Enter M: ");
+	    float M = input.nextFloat();  // The distance between the holes (M) ruler
+	    System.out.print("Enter N: ");
+	    float N = input.nextFloat(); // The distance between the holes (N) ruler
+	    System.out.print("Enter L: ");
+	    float L = input.nextFloat();  // Length of the rulers
+
+	    for(int i=0;i<L;i++)
+	    {
+	    	temp += M;
+	    	holesM[i] = temp; // fill the array with places where are the holes
+	    }
+	    temp = 0;
+	    for(int i=0;i<L;i++)
+	    {
+	    	temp += N;
+	    	holesN[i] = temp; // fill the array with places where are the holes
+	    }
+	    for(int i=0;i<L;i++)
+	    {
+	    	if(holesM[i] == holesN[i]) // search for matches in both arrays
+	    		count++;
+	    }
+	    	System.out.println(" All holes that will match: " + count);
+	}
+}
+Task 9
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println(" Enter first number: ");
+		int N = input.nextInt(); // first border
+		
+		System.out.println(" Enter second number: ");
+		int M = input.nextInt(); // second border
+		
+		if(N == M) // if numbers are equal
+		System.out.println(" The numbers are equal!");
+		else
+		{	
+		  if(N < M) // if first number is smaller than second
+		  {
+		    System.out.printf("All numbers between (%d - %d)\n",N ,M);
+			 for(int i = N+1; i < M; i++)	
+			 {
+				 if((i%3==0) && (i%2==0) && (i%5==0)) 
+					 System.out.print(" " + i);
+			 }
+		  }
+		  else // if second number is smaller than first
+		  {
+			 System.out.printf("All numbers between (%d - %d)\n",M ,N);
+			   for(int i = M+1; i < N; i++)	
+			   {
+				   if((i%3==0) && (i%2==0) && (i%5==0))
+						 System.out.print(" " + i); 
+			   }
+				 
+		  }
+		}
+	}
+}
+Task 10
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float inputNumber = 0;
+		int count = 0;
+		
+		do {
+		    System.out.print("Enter number: ");
+		    inputNumber = input.nextFloat();
+		    if(inputNumber == 0) // exit
+			   break;
+		     else
+		    {
+		       if(inputNumber < 0)
+		       count++;  // count negative numbers
+		    }
+	    } while (true); // infinity loop
+		
+		System.out.println(" All negative numbers are: " + count);
+	}
+}
+Task 11
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float inputNumber = 0, sum = 0;
+		int count = 0;
+		
+		System.out.print("Enter K: ");
+		float K = input.nextFloat();
+		
+		do {
+			System.out.print("Enter number: ");
+			inputNumber = input.nextFloat();
+			sum += inputNumber; // sum of all numbers after K
+			count++;   // counts of all numbers entered after K
+			
+		} while(sum <= K); 
+
+		System.out.println(" Counts of all numbers entered after K: " + count); // print counts
+		System.out.printf(" Average of the numbers entered after K: %.2f%n",(sum/count)); 
+	}
+}
+Task 12
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float participant1 = 0, participant2 = 0, participant3 = 0;
+		float sum = 0;
+		
+		do {
+		System.out.print("Enter points for 1 participant: ");
+	    participant1 = input.nextFloat(); 
+	    System.out.print("Enter points for 2 participant: ");
+	    participant2 = input.nextFloat(); 
+	    System.out.print("Enter points for 3 participant: ");
+	    participant3 = input.nextFloat(); 
+	    
+	    if( participant1 == 0 && participant2 == 0 && participant3 == 0) // exit 000
+	    {
+	    	System.out.println(" You just exit from program!");
+	    	break;
+	    }
+	    sum = participant1+participant2+participant3; // sum of points
+	    if(sum%3==0)
+	    	System.out.println("YES"); // if team is good
+	    else
+	    	System.out.println("NO"); // if team is bad
+		}  while(true); // infinity loop
+	}
+}
+Task 13
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float maxNegativeNumber = 0;
+		int i = 0, j = 0;
+
+		System.out.print("Enter how many numbers you'll input: ");
+		int size = input.nextInt();   // size of array
+		float[] allNumbers = new float[size]; // array for all entered numbers
+		float[] allNegativeNumbers = new float[size];   // array for all negative numbers
+		
+		for(int k = 0;k <allNumbers.length; k++)  //fill the array
+		{
+		    System.out.print("Enter number: ");
+		    allNumbers[k] = input.nextFloat();
+	    } 
+
+		for(i = 0;i <allNumbers.length; i++)  // fill the second array with all negative numbers
+		{
+			if(allNumbers[i] < 0)
+			{
+			   allNegativeNumbers[j] = allNumbers[i];
+			   j++;
+			}		
+		}
+		maxNegativeNumber = allNegativeNumbers[0];  // take first element of array for compare 
+	    for(int k = 0; k<allNegativeNumbers.length;k++)
+	    {
+	    	if((maxNegativeNumber < allNegativeNumbers[k])&&(allNegativeNumbers[k] != 0)) // finding  biggest negative number
+	    		maxNegativeNumber = allNegativeNumbers[k];
+	    }
+          if(maxNegativeNumber<0)  // if user doesn't enter negative numbers
+		    System.out.printf("The biggest negative number is: %.2f %n",maxNegativeNumber);
+          else
+		    System.out.printf("Couldn't find negative numbers");
+	}
+}
+
+Task 14
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		int winner = 0, temp = 0;
+		
+		System.out.print("Enter number of athlets: ");
+		int athletes = input.nextInt();  // size of array
+
+		float[] athletesResult = new float[athletes]; // array for athletes result
+		float[] athletesWeight = new float[athletes]; // array for athletes weight
+		
+		for(int i=0;i < athletesResult.length;i++) // fill both arrays
+		{
+			System.out.printf("Enter result for %d athlete: ",i+1);
+			athletesResult[i]= input.nextFloat();
+			System.out.printf("Enter weight for %d athlete: ",i+1);
+			athletesWeight[i]= input.nextFloat();
+		}		
+		for(int i=1;i < athletesResult.length;i++) // finding athlete with best result
+		{
+			if( athletesResult[0] <  athletesResult[i])
+				winner = i-1;
+			else 
+				winner = 0;
+		}
+		for(int i=0;i < athletesWeight.length;i++) // if there are two or more athletes with same result
+		{
+			if(athletesResult[winner] == athletesResult[i])
+			{
+				if(athletesWeight[winner] > athletesWeight[i]) // comparing the weight of athletes
+					winner = i;					
+			}
+		}
+		System.out.printf("Winner is: %d", winner + 1);
+	}
+}
+Task 15
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Enter number: ");
+		int inputNumber = input.nextInt();
+		int digits =  numberDigits(inputNumber); 
+		int[] array = new int[digits];
+		convert(inputNumber,array, digits); 
+		  
+		 for(int i = digits - 1;i>=0;i--) // print digits of number
+	         	System.out.print(" " + array[i]);
+	}
+	static int numberDigits(int number) // This method find digits of number
+    {
+        int count = 0;
+        while (number != 0)
+        {
+            number /= 10; 
+            count++;
+        }
+        return count; // returns count of digits
+    }
+	static void convert(int number,int[] array, int digits) // This method fill the array with digits
+	{    
+         for (int i = digits - 1; i >= 0; i--)
+         {
+             array[i]=number%10; //fills array with digits of number
+             number /= 10;
+         } 
+	}
+}
+Task 16
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Enter number: ");
+		int number = input.nextInt();
+	      System.out.println("Converted number is: " + convert(number));
+	}
+	  static int numberDigit(int number) // This function find digits of number
+      {
+          int count = 0;
+          while (number != 0)
+          {
+              number /= 10; // divides number till nothing left
+              count++;
+          }
+          return count; // returns count of digits
+      }
+      static int convert(int number) 
+      {
+          int convert = 0;
+          int digits = numberDigit(number);
+          for (int i = digits - 1; i >= 0; i--)
+          {
+              convert += (number % 10) * (int)Math.pow(10, i); //converting the number
+              number /= 10;
+          }
+          return convert;
+      }
+}
+Task 17
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		float number1 = 0, number2 = 0, number3 = 0, number4 = 0, number5 = 0 , sum = 0;
+
+		do {
+			System.out.println("Enter 5 numbers:");
+			number1 = input.nextFloat(); // 1 number
+			number2 = input.nextFloat(); // 2 number
+			number3 = input.nextFloat(); // 3 number
+			number4 = input.nextFloat(); // 4 number
+			number5 = input.nextFloat(); // 5 number
+			sum = (number1+number2+number3+number4+number5); // sum of all 5 numbers
+			if((number1>number2)&&(number2>number3)&&(number3>number4)&&(number4>number5)) // if each one number is bigger than next
+			{
+				System.out.println("Sum is:" + sum); // print sum
+				break;  // exit
+			}
+		} while(true);	
+	}
+}
+Task 18
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		 float parameter = 0, biggestParameter = 0;
+
+			System.out.println("Enter 3 numbers:");
+			float sideA = input.nextFloat(); // 1 number
+			float sideB = input.nextFloat(); // 2 number
+			float sideC = input.nextFloat(); // 3 number
+			if((sideA>sideB+sideC)||(sideB>sideA+sideC)||(sideC>sideA+sideB)) // if first numbers can't be sides of a triangle
+				System.out.println(" This numbers can't be sides of a triangle."); // end of program
+			else
+			{
+			     biggestParameter= (sideA+sideB+sideC); // assume that first parameter is the biggest
+                do {
+        	        System.out.println("Enter 3 numbers:");
+  			         sideA = input.nextFloat(); // enter again 1 number
+  			         sideB = input.nextFloat(); // enter again 2 number
+  			         sideC = input.nextFloat(); // enter again 3 number
+  			    
+  			    if((sideA>sideB+sideC)||(sideB>sideA+sideC)||(sideC>sideA+sideB)) // if this numbers can't be sides of a triangle
+			     {
+				    System.out.printf("The biggest parameter is: %.2f", biggestParameter); //print biggest parameter
+				    break; //exit
+			     }
+  			        parameter = (sideA+sideB+sideC);
+  			        if(biggestParameter < parameter) //if new parameter is bigger than old one
+  				        biggestParameter = parameter;			
+		        } while(true);	// infinity loop
+			}
+	}
+}
+Task 19
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		 int count = 0;
+
+		 System.out.println("Enter number (N<=27): ");
+		 int N = input.nextInt();
+		 for(int i = 100; i<=999;i++) // all three-digit natural numbers
+		 {
+			 if(convert(i) > N) // checks if sum of the numbers is greater than N
+				count++;
+		 }
+		 System.out.printf(" Number of three-digit natural numbers,\n with the sum of the numbers greater than %d is: %d", N, count); // print count
+	}
+    static int convert(int number) 
+    {
+        int a = 0, b=0, c=0, sum = 0;
+        
+            a = number % 10; //takes 3 digit
+            number /= 10;
+            b = number % 10;  //takes 2 digit
+            number /= 10;
+            c = number % 10;  //takes 1 digit
+
+        sum = (a+b+c); // sum of all digits
+        return sum;
+    }
+}
+Task 20
+import java.util.Scanner;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		 int count = 0;
+		 
+
+		 System.out.println("Enter number in interval [100-999]: ");
+		 int N = input.nextInt();
+		 if(N>100 && N<999)
+		 {
+			 for(int i = 100; i<N;i++) // all three-digit natural numbers
+		     {
+			    if(convert(i) == true) // if digits are not equal, count++
+				  count++;
+		     }
+		    System.out.printf(" All three-digit natural numbers less than %d,\n which doesn't contain the same numerals are: %d", N, count);  // print count
+		 }
+		 else
+			 System.out.println(" The number you just entered in not in interval [100 - 999]"); // in case number is out of interval
+	}
+    static boolean convert(int number) 
+    {
+        int a = 0, b=0, c=0;
+        boolean check = false;
+        
+            a = number % 10; //takes 3 digit
+            number /= 10;
+            b = number % 10;  //takes 2 digit
+            number /= 10;
+            c = number % 10;  //takes 1 digit
+            if((a != b)&&(a != c)&&(b != c)) //check if digits are equal
+            	check = true;
+            else
+            	check = false;
+            
+        return check;
+    }
+}
+
+
+
