@@ -1,0 +1,245 @@
+Task 1
+import java.util.Scanner;
+
+public class Sample
+{
+   public static void main(String[] args)
+   {
+	   Scanner input = new Scanner(System.in);
+	   
+	   String[] names = new String[10];	   
+	   for(int i =0;i<names.length;i++)
+	   {
+		   System.out.printf("Enter name for %d: \n",i+1);
+		   names[i]= input.nextLine();
+	   }
+	   System.out.println(" 1 ");
+	   for(String a: names)
+	   System.out.println(a);
+	   
+	   System.out.println(" 2 ");
+	   for(int i= names.length-1;i>=0;i--)
+		   System.out.println(names[i]);	   
+   }
+	    
+}
+
+Task 2
+import java.util.Scanner;
+
+public class Sample
+{
+   public static void main(String[] args)
+   {
+	   Scanner input = new Scanner(System.in);
+	   
+	   String[] names = new String[10];	
+	   int[] money = new int[10];
+	   int moneySum = 0, maximum = 0, minimum = 0, location = 0;
+	   
+	   
+	   
+	   for(int i =0;i<names.length;i++)
+	   {
+		   System.out.printf("Enter name for %d: \n",i+1);
+		   names[i]= input.nextLine();
+		   System.out.printf("Enter money for %d: \n",i+1);
+		   money[i]= input.nextInt();
+		   
+	   }
+	   maximum = money[0];
+	   for(int i = 1;i< money.length;i++)
+	   {
+		   if(money[i]>maximum)
+		   {
+			   maximum = money[i];
+			   location = i+1;
+		   }	   
+	   }
+	   System.out.printf("the worker with biggest profit is: %s - %d", names[location],maximum);
+	   
+	   minimum = money[0];
+	   location = 0;
+	   for(int i = 1;i< money.length;i++)
+	   {
+		   if(money[i]<minimum)
+		   {
+			   minimum = money[i];
+			   location = i+1;
+		   }	   
+	   }
+	   System.out.printf("the worker with smallest profit is: %s - %d", names[location],minimum);
+	   for(int i = 0; i< money.length;i++)
+	   {
+		  moneySum += money[i];  
+	   }
+	   System.out.printf("Sum is: %d", moneySum);   
+	   System.out.printf("Average of sum is: %d", (moneySum/10));   
+   }
+	    
+}
+
+Task 3
+
+import java.util.Scanner;
+
+public class Sample
+{
+   public static void main(String[] args)
+   {
+	   Scanner input = new Scanner(System.in);
+	   	
+	   System.out.printf("Enter days of mount: ");
+	   int days = input.nextInt();
+	   
+	   float[] hot = new float[days];	
+	   float sum = 0, average = 0;
+	   int[] period =new int[days];
+	   int cold = 0, j=0, k=1,coldestPeriod = 0;
+	   
+	   for(int i =0;i<hot.length;i++)
+	   {
+		   System.out.printf("Enter temperature for %d day: \n",i+1);
+		     hot[i]= input.nextFloat();
+		     sum += hot[i];
+	   }
+	   average = (sum/(float)days);
+	   System.out.printf("Average temperature is: %.2f\n", average);
+	   for(int i = 0; i< hot.length;i++)
+	   {
+		   if(hot[i]< average)
+			 cold++;
+		   else
+		   {
+			  if(cold != 0)
+			  {
+				period[j]= cold;
+			    cold = 0;
+			    j++;
+			  }
+		   }   
+	   }
+	   coldestPeriod = period[0];
+	   for(int i = 1;i<hot.length;i++)
+	   {
+		   if(period[i] > coldestPeriod)
+			  coldestPeriod = period[i];
+	   }
+	   System.out.println(" 2.The coldest period is:" + coldestPeriod);
+	   
+	   for(int i = 0; i < period.length;i++)
+		   period[i]=0;
+            j = 0; cold = 0;
+	   for(int i = 0; k < hot.length;i++)
+	   {
+		   if(hot[i]> hot[k])
+			 cold++;
+		   else
+		   {
+			  if(cold != 0)
+			  {
+				period[j]= cold;
+			    cold = 0;
+			    j++;
+			  }
+		   } 
+		   k++;
+	   }
+	   coldestPeriod = period[0];
+	   for(int i = 1;i<hot.length;i++)
+	   {
+		   if(period[i] > coldestPeriod)
+			  coldestPeriod = period[i];
+	   }
+	   System.out.println(" 3.The coldest period is:" + coldestPeriod);
+   }	    
+}
+
+Task 4
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Sample 
+{
+	public static void main(String[] args) 
+	{
+		final int N =3 ;
+		Scanner input = new Scanner(System.in);	  
+		int[][] holidays = new int[N][];
+		int numberOfHolidays = 0;
+		
+		// input holidays
+		for(int month = 0;month<N;month++)
+		{
+			System.out.printf("Enter number of holidays is %d month: ",month+1);
+			 numberOfHolidays = input.nextInt();
+			 holidays[month] = new int[numberOfHolidays];
+			 System.out.println("Enter date of all holidays: ");
+			 for(int i = 0;i<numberOfHolidays;i++)
+				 holidays[month][i]=input.nextInt();
+			 Arrays.sort(holidays[month]);
+		}
+		
+	   // 1. month with max holidays
+		int max = holidays[0].length,location = 0;
+		for(int month=1;month<N;month++)
+		{
+		  if(holidays[month].length > max)
+		  {
+			  max = holidays[month].length;
+			  location = month;
+		  }	  
+		}
+		System.out.print("The month with max holidays: ");
+		for(int i = 0;i<holidays[location].length;i++)
+		{
+			System.out.print(" " + holidays[location][i]);
+		}
+		
+		 // 2. most often holiday date
+		int count = 0, maxDay = 0,maxCount = 0;
+		for(int day = 1;day <31;day++)
+		{
+			count = 0;
+			for(int month = 0;month<N;month++)
+			{
+				for(int i = 0;i<holidays[month].length;i++)
+				{
+					if(holidays[month][i] == day)
+						count++;
+				}
+			}
+			if( count > maxCount)
+			{
+				maxCount = count;
+				maxDay = day;
+			}
+		}
+		System.out.println("The most often holiday date is: " + maxDay);
+		
+		//3. find longest sequence of holidays
+		int monthS = 0,maxS = 0,indexS = 0,currS = 1;
+		for(int month = 0;month<N;month++)
+		{
+			currS = 1;
+			for(int i = 1;i<holidays[month].length;i++)
+			{
+				if(holidays[month][i] == holidays[month][i-1]+1)
+				{
+				   currS++;
+				   if(currS > maxS)
+		            {
+		     		   maxS = currS;
+		     		   indexS = i - maxS +1;
+		     		   monthS = month;
+				    }
+				} 
+				else
+		    	  currS = 1;
+			}
+		}
+		for(int i = indexS;i<indexS + maxS;i++)
+			System.out.print(" " + holidays[monthS][i]);
+	}
+}
